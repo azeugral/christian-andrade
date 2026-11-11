@@ -12,7 +12,13 @@
 
   /* ---------- hero ---------- */
   var hero = $('.hero'), arte = $('#arte'), poster = $('#arte-poster'), legNome = $('#arte-nome');
-  var pecaAtual = 0;
+  var pecaAtual = 0, faseAtual = 2, lis = $$('#arte-fases li'), barra = $('#arte-barra');
+  if (barra) barra.style.transform = 'scaleX(1)';
+  function estado(e) {
+    mudaPeca(e.i);
+    if (e.f !== faseAtual) { faseAtual = e.f; lis.forEach(function (l, k) { l.classList.toggle('on', k === e.f); }); }
+    barra.style.transform = 'scaleX(' + e.p.toFixed(4) + ')';
+  }
   function forma() {
     var w = html.clientWidth, h = W.innerHeight;
     hero.classList.toggle('pe', w < 760 || w / h < 1.05);
@@ -37,7 +43,7 @@
         H.textura(i, im); n++;
         if (n === nomes.length) roda();
       };
-      im.src = 'assets/hero/' + nm + '.webp?v=1';
+      im.src = 'assets/hero/' + nm + '.webp?v=2';
     });
     var t0 = null, tPausa = 0, ultimo = 0;
     function roda() {
@@ -47,8 +53,7 @@
         if (!visivel || D.hidden) { if (t0 !== null) tPausa = ts - t0; t0 = null; return; }
         if (t0 === null) t0 = ts - tPausa;
         var lado = arte.clientWidth;
-        var i = H.desenha((ts - t0) / 1000, lado, Math.min(W.devicePixelRatio || 1, 2));
-        mudaPeca(i);
+        estado(H.desenha((ts - t0) / 1000, lado, Math.min(W.devicePixelRatio || 1, 2)));
         if (!ultimo) { ultimo = 1; poster.style.opacity = '0'; }
       }
       requestAnimationFrame(quadro);
@@ -60,14 +65,17 @@
     v.muted = true; v.loop = true; v.playsInline = true; v.autoplay = true;
     v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('aria-hidden', 'true');
     v.preload = 'auto'; v.poster = poster.src; v.disablePictureInPicture = true;
-    v.src = 'assets/video/hero.mp4?v=1';
+    v.src = 'assets/video/hero.mp4?v=2';
     arte.insertBefore(v, poster);
     var ok = false;
     function falha() { if (ok) return; v.remove(); comecaShader(); }
     var p = v.play();
     if (p && p.then) p.then(function () { ok = true; poster.style.opacity = '0'; }).catch(falha);
     v.addEventListener('error', falha);
-    v.addEventListener('timeupdate', function () { mudaPeca(Math.floor(v.currentTime / W.STENCIL_PECA) % 3); });
+    (function segue() {
+      requestAnimationFrame(segue);
+      if (ok && !v.paused) estado(W.stencilEstado(v.currentTime));
+    })();
     if ('IntersectionObserver' in W) new IntersectionObserver(function (e) { if (!ok) return; e[0].isIntersecting ? v.play().catch(function () {}) : v.pause(); }).observe(hero);
   }
   if (!calmo) {
@@ -163,12 +171,18 @@
       if (!el.hasAttribute('data-pt-aria')) el.setAttribute('data-pt-aria', el.getAttribute('aria-label'));
       el.setAttribute('aria-label', l === 'en' ? el.getAttribute('data-en-aria') : el.getAttribute('data-pt-aria'));
     });
+    $$('[data-en-alt]').forEach(function (el) {
+      if (!el.hasAttribute('data-pt-alt')) el.setAttribute('data-pt-alt', el.alt);
+      el.alt = l === 'en' ? el.getAttribute('data-en-alt') : el.getAttribute('data-pt-alt');
+    });
     $$('.lingua button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === l)); });
+    var lm = $('#lingua-m'); if (lm) lm.textContent = l === 'en' ? 'PT' : 'EN';
     legNome.textContent = NOMES[l][pecaAtual];
     pinta();
     guarda('ca-lang', l);
   }
   $$('.lingua button').forEach(function (b) { b.addEventListener('click', function () { if (b.dataset.lang !== LANG) trocaLingua(b.dataset.lang); }); });
+  $('#lingua-m').addEventListener('click', function () { trocaLingua(LANG === 'en' ? 'pt' : 'en'); });
   var ini = le('ca-lang') || ((navigator.language || 'pt').toLowerCase().indexOf('pt') === 0 ? 'pt' : 'en');
   if (ini === 'en') trocaLingua('en'); else pinta();
 

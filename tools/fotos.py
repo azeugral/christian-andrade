@@ -62,15 +62,29 @@ EXTRA = [
     ('viagem-1', 'posts/027_0'), ('viagem-2', 'posts/031_0'), ('viagem-3', 'posts/039_0'), ('viagem-4', 'posts/041_0'), ('viagem-5', 'posts/012_1'),
     ('cob-tartaruga-antes', 'posts/009_1'), ('cob-tartaruga', 'posts/009_0'), ('cob-onca-antes', 'posts/072_1'), ('cob-onca', 'posts/072_0'),
     ('cob-lobo-antes', 'posts/059_1'), ('cob-lobo', 'posts/059_0'), ('cob-magpie-antes', 'posts/067_1'), ('cob-magpie', 'posts/067_0'),
-    ('dep-coelho', 'hl/feedback/01'), ('dep-pai', 'hl/feedback/02'), ('dep-cao', 'hl/feedback/03'),
+    ('dep-coelho', 'posts/058_0'), ('dep-pai', 'posts/052_0'), ('dep-cao', 'hl/feedback/03'),
 ]
+# recorte extra: zoom (>1 aproxima) e foco (fx, fy) para fotos com texto ou balao em cima
+ZOOM = {'dep-cao': (1.55, .5, .78), 'cob-tartaruga': (1.6, .42, .56), 'cob-tartaruga-antes': (1.0, .5, .5)}
 FOCO = {'sobre': .35, 'premio-lisboa': .35, 'premio-porto': .4, 'cic-manga': .5, 'stencil-tablet': .55, 'sobre-2': .45}
 
 for d in ('p', 'g'): (S / f'assets/img/{d}').mkdir(parents=True, exist_ok=True)
 
 
 def abre(f):
-    return ImageOps.exif_transpose(Image.open(f)).convert('RGB')
+    im = ImageOps.exif_transpose(Image.open(f)).convert('RGB')
+    # tira tarjas pretas laterais (foto do Sobre)
+    g = im.convert('L'); w, h = g.size
+    col = [sum(g.crop((x, 0, x + 1, h)).getdata()) / h for x in range(w)]
+    a = next((x for x in range(w // 4) if col[x] > 14), 0); b = next((x for x in range(w - 1, w * 3 // 4, -1) if col[x] > 14), w - 1)
+    if a > 4 or b < w - 5: im = im.crop((a + 2, 0, b - 1, h))
+    return im
+
+
+def zoom(im, z, fx, fy):
+    w, h = im.size; nw, nh = int(w / z), int(h / z)
+    x = int((w - nw) * fx); y = int((h - nh) * fy)
+    return im.crop((x, y, x + nw, y + nh))
 
 
 def mini(im, fy=.5, W=720, H=900):
@@ -99,9 +113,13 @@ for pid, post, idx, cat, pt, en, fy in PORT:
 
 for n, f in EXTRA:
     im = abre(R / f'{f}.jpg')
+    if n in ZOOM: im = zoom(im, *ZOOM[n])
     mini(im, FOCO.get(n, .5)).save(S / f'assets/img/p/{n}.webp', quality=82, method=6)
     grande(im).save(S / f'assets/img/g/{n}.webp', quality=84, method=6)
 
+est = abre(R / 'posts/015_0.jpg')
+w, h = est.size; nh = int(w * 10 / 16); y = int((h - nh) * .55)
+est.crop((0, y, w, y + nh)).resize((1120, 700), Image.LANCZOS).save(S / 'assets/img/p/estudio.webp', quality=82, method=6)
 (S / 'assets/js/dados.js').write_text('window.PORT=' + json.dumps(dados, ensure_ascii=False, separators=(',', ':')) + ';\n', encoding='utf8')
 tot = sum(f.stat().st_size for f in (S / 'assets/img').rglob('*.webp'))
 print(len(dados), 'pecas', len(EXTRA), 'extra', round(tot / 1e6, 1), 'MB')

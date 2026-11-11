@@ -15,13 +15,14 @@
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/outfit-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/site.css?v=1">
+<link rel="stylesheet" href="assets/css/site.css?v=2">
 </head>
 <body>
 <a class="saltar" href="#trabalhos" data-en="Skip to the work">Saltar para os trabalhos</a>
 
 <header class="topo" id="topo">
   <div class="wrap">
+    <button class="lingua-m" type="button" id="lingua-m" aria-label="Read in English" data-en-aria="Ler em português">EN</button>
     <a class="marca" href="#inicio">Christian Andrade</a>
     <nav class="nav" aria-label="Principal">
       <a href="#trabalhos" data-en="Work">Trabalhos</a>
@@ -56,14 +57,20 @@
 
 <main>
 <section class="hero" id="inicio" aria-label="Christian Andrade">
+  <h1 class="vh" data-en="Christian Andrade, tattoo artist in Lisbon">Christian Andrade, tatuador em Lisboa</h1>
   <div class="hero-palco">
-    <h1 class="nome nome-1">Christian Andrade</h1>
-    <span class="nome e" aria-hidden="true">Christian</span>
+    <div class="topo-pe" aria-hidden="true"><span class="nome">Christian Andrade</span><small>Lisboa · LX Factory</small></div>
+    <div class="lado e" aria-hidden="true"><span class="nome">Christian</span><small data-en="Realism · Neo-traditional">Realismo · Neotradicional</small></div>
     <div class="arte" id="arte" role="img" aria-label="Uma tatuagem do Christian a nascer: primeiro o stencil roxo, depois a sombra, por fim a pele limpa." data-en-aria="One of Christian's tattoos coming to life: first the purple stencil, then the shading, then clean skin.">
-      <img id="arte-poster" src="assets/img/hero-poster.webp" alt="" width="1080" height="1080">
-      <p class="arte-leg"><b id="arte-nome">Woody</b> · <span data-en="from stencil to skin">do stencil à pele</span></p>
+      <img id="arte-poster" src="assets/img/hero-poster.webp?v=2" alt="" width="1080" height="1080">
+      <i class="reg a"></i><i class="reg b"></i><i class="reg c"></i><i class="reg d"></i>
+      <div class="fases" aria-hidden="true">
+        <span class="peca-nome" id="arte-nome">Woody</span>
+        <ol id="arte-fases"><li data-en="Stencil">Stencil</li><li data-en="Shading">Sombra</li><li class="on" data-en="Skin">Pele</li></ol>
+        <div class="barra"><i id="arte-barra"></i></div>
+      </div>
     </div>
-    <span class="nome d" aria-hidden="true">Andrade</span>
+    <div class="lado d" aria-hidden="true"><span class="nome">Andrade</span><small>Lisboa · LX Factory</small></div>
   </div>
   <div class="hero-pe">
     <p data-en="Realism, neo-traditional and pet portraits at Queen of Hearts, LX Factory, Lisbon. Custom projects, drawn for your skin.">Realismo, neotradicional e retratos de animais na Queen of Hearts, LX Factory, em Lisboa. Projetos à medida, desenhados para a tua pele.</p>
@@ -74,14 +81,7 @@
   </div>
 </section>
 
-<div class="faixa">
-  <div class="wrap">
-    <div><b data-en="Pet portraits">Retratos de animais</b><span data-en="From your photo to your skin">Da tua foto para a pele</span></div>
-    <div><b data-en="Black &amp; grey realism">Realismo preto e cinza</b><span data-en="Whip shading, depth and texture">Whip shading, profundidade e textura</span></div>
-    <div><b data-en="Neo-traditional">Neotradicional</b><span data-en="Colour, line and contrast">Cor, linha e contraste</span></div>
-    <div><b data-en="Sleeves">Mangas</b><span data-en="Long projects, session by session">Projetos longos, sessão a sessão</span></div>
-  </div>
-</div>
+<div class="faixa" aria-hidden="true"><div class="trilho"><ul><li data-en="Pet portraits">Retratos de animais</li><li data-en="Black &amp; grey realism">Realismo preto e cinza</li><li data-en="Neo-traditional">Neotradicional</li><li data-en="Sleeves">Mangas</li><li data-en="Cover-ups">Coberturas</li><li data-en="From stencil to skin">Do stencil à pele</li></ul><ul><li data-en="Pet portraits">Retratos de animais</li><li data-en="Black &amp; grey realism">Realismo preto e cinza</li><li data-en="Neo-traditional">Neotradicional</li><li data-en="Sleeves">Mangas</li><li data-en="Cover-ups">Coberturas</li><li data-en="From stencil to skin">Do stencil à pele</li></ul></div></div>
 
 <section class="sec" id="trabalhos">
   <div class="wrap">
@@ -112,24 +112,27 @@
     </header>
     <div class="passos">
       <div class="passo rev">
-        <figure><div class="ft"><img src="assets/img/p/ref-zeus.webp" alt="Retrato do cão Zeus ao lado da fotografia usada como referência" width="720" height="900" loading="lazy"></div></figure>
+        <figure class="mold"><div class="ft"><img src="assets/img/p/ref-zeus.webp" alt="Retrato do cão Zeus ao lado da fotografia usada como referência" width="720" height="900" loading="lazy"></div></figure>
+        <span class="etapa" data-en="step 1 of 3">passo 1 de 3</span>
         <h3 data-en="The reference">A referência</h3>
         <p data-en="You send the photo and the story. The drawing is made for you, on the tablet, before it goes anywhere near the skin.">Mandas a foto e a história. O desenho é feito para ti, no tablet, antes de chegar à pele.</p>
       </div>
       <div class="passo rev">
-        <figure><div class="ft"><img src="assets/img/p/stencil-pele.webp" alt="Stencil roxo aplicado no braço antes de tatuar" width="720" height="900" loading="lazy"></div></figure>
+        <figure class="mold"><div class="ft"><img src="assets/img/p/stencil-pele.webp" alt="Stencil roxo aplicado no braço antes de tatuar" width="720" height="900" loading="lazy"></div></figure>
+        <span class="etapa" data-en="step 2 of 3">passo 2 de 3</span>
         <h3 data-en="The stencil">O stencil</h3>
         <p data-en="The design is placed on the body and adjusted to the anatomy, so it reads well for years.">O desenho é posto no corpo e ajustado à anatomia, para se ler bem durante anos.</p>
       </div>
       <div class="passo rev">
-        <figure><div class="ft"><img src="assets/img/p/result-pele.webp" alt="Caveira neotradicional com rosas vermelhas, terminada" width="720" height="900" loading="lazy"></div></figure>
+        <figure class="mold"><div class="ft"><img src="assets/img/p/result-pele.webp" alt="Caveira neotradicional com rosas vermelhas, terminada" width="720" height="900" loading="lazy"></div></figure>
+        <span class="etapa" data-en="step 3 of 3">passo 3 de 3</span>
         <h3 data-en="The skin">A pele</h3>
         <p data-en="Line, shading and colour, built session by session until the piece is complete.">Linha, sombra e cor, construídas sessão a sessão até a peça ficar completa.</p>
       </div>
     </div>
     <div class="refs">
-      <h3 class="rev" data-en="The photo next to the tattoo">A foto ao lado da tatuagem</h3>
-      <p class="rev" data-en="Pet and family portraits next to the reference that started them.">Retratos de animais e de família ao lado da referência que lhes deu origem.</p>
+      <header class="cab rev"><h3 data-en="The photo next to the tattoo">A foto ao lado da tatuagem</h3>
+      <p data-en="Pet and family portraits next to the reference that started them.">Retratos de animais e de família ao lado da referência que lhes deu origem.</p></header>
       <div class="blocos">
         <figure class="bloco rev"><div class="ft"><img src="assets/img/p/ref-thor.webp" alt="Thor, retrato de cão ao lado da foto" width="720" height="900" loading="lazy"></div><figcaption><b>Thor</b><span data-en="for Jéssica, who lives in Portugal">para a Jéssica, que vive em Portugal</span></figcaption></figure>
         <figure class="bloco rev"><div class="ft"><img src="assets/img/p/ref-conceicao.webp" alt="Retrato da Conceição ao lado da foto" width="720" height="900" loading="lazy"></div><figcaption><b>Conceição</b><span data-en="a family portrait">um retrato de família</span></figcaption></figure>
@@ -158,9 +161,9 @@
 
 <section class="sec escuro" id="viagens">
   <div class="wrap viagem">
-    <div class="grande rev"><img src="assets/img/p/viagem-1.webp" alt="Manga com os destinos do Daniel" width="720" height="900" loading="lazy"></div>
+    <div class="grande mold rev"><img src="assets/img/p/viagem-1.webp" alt="Manga com os destinos do Daniel" width="720" height="900" loading="lazy"></div>
     <div class="txt rev">
-      <span class="chapeu" style="font:italic 400 21px/1 var(--serif);color:var(--roxo-claro);display:block;margin-bottom:14px" data-en="custom project">projeto autoral</span>
+      <span class="chapeu" data-en="custom project">projeto autoral</span>
       <h2 data-en="One sleeve, eleven destinations">Uma manga, onze destinos</h2>
       <p data-en="A sleeve that tells every trip of Daniel, from Bali to the Algarve, where his family built the chimneys that close the story. Each country became an image, layered to respect anatomy, flow and long-term reading.">Uma manga que conta cada viagem do Daniel, de Bali ao Algarve, onde a família dele construiu as chaminés que fecham a história. Cada país virou imagem, em camadas pensadas para a anatomia, o fluxo e a leitura a longo prazo.</p>
       <ul class="destinos">
@@ -218,9 +221,9 @@
 
 <section class="sec" id="sobre">
   <div class="wrap sobre">
-    <div class="ft rev"><img src="assets/img/p/sobre.webp" alt="Christian Andrade a tatuar" width="720" height="900" loading="lazy"></div>
+    <div class="ft mold rev"><img src="assets/img/p/sobre.webp" alt="Christian Andrade a tatuar" width="720" height="900" loading="lazy"></div>
     <div class="txt rev">
-      <span class="chapeu" style="font:italic 400 21px/1 var(--serif);color:var(--roxo);display:block;margin-bottom:14px" data-en="about">sobre</span>
+      <span class="chapeu" data-en="about">sobre</span>
       <h2 data-en="From São Paulo to Lisbon">De São Paulo a Lisboa</h2>
       <p data-en="Christian grew up around tattooing: his older brother is a tattoo artist and the reference that took him to his first convention. In São Paulo he built his name in realism and pet portraits, and in 2024 he moved to Lisbon.">O Christian cresceu no meio da tatuagem: o irmão mais velho é tatuador e foi a referência que o levou à primeira convenção. Em São Paulo fez nome no realismo e nos retratos de animais e, em 2024, mudou-se para Lisboa.</p>
       <p data-en="Today he works at Queen of Hearts in LX Factory and travels to guest spots across Europe, with stops in London and The Hague. Every project is drawn from scratch, by consultation.">Hoje trabalha na Queen of Hearts, na LX Factory, e faz guest spots pela Europa, com passagens por Londres e Haia. Cada projeto é desenhado do zero, mediante consulta.</p>
@@ -253,7 +256,7 @@
     </header>
     <div class="onde">
       <article class="local rev">
-        <div class="mapa"><iframe title="Mapa da LX Factory, Lisboa" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=LX%20Factory%2C%20Rua%20Rodrigues%20de%20Faria%20103%2C%20Lisboa&amp;output=embed"></iframe></div>
+        <div class="mapa"><img src="assets/img/p/estudio.webp" alt="O estúdio Queen of Hearts na LX Factory" data-en-alt="Queen of Hearts studio at LX Factory" width="1120" height="700" loading="lazy"></div>
         <div class="corpo">
           <span class="tag" data-en="base">base</span>
           <h3>Queen of Hearts · LX Factory</h3>
@@ -263,7 +266,7 @@
         </div>
       </article>
       <article class="local rev">
-        <div class="mapa"><span class="cidade" aria-hidden="true">Den Haag</span></div>
+        <div class="mapa"><span class="cidade" aria-hidden="true">Den Haag<small data-en="7 – 13 December">7 – 13 dezembro</small></span></div>
         <div class="corpo">
           <span class="tag">guest spot</span>
           <h3 data-en="The Hague · Netherlands">Haia · Países Baixos</h3>
@@ -286,7 +289,7 @@
     <form class="form" id="form" novalidate>
       <div class="campo"><label for="f-nome" data-en="Name">Nome</label><input id="f-nome" name="nome" autocomplete="name" required></div>
       <div class="campo"><label for="f-zona" data-en="Body area">Zona do corpo</label><input id="f-zona" name="zona" placeholder="ex.: antebraço" data-en-ph="e.g. forearm"></div>
-      <div class="campo todo"><span class="lbl" style="font:500 13px/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--grafite)" data-en="Style">Estilo</span>
+      <div class="campo todo"><span class="lbl" data-en="Style">Estilo</span>
         <div class="chips" role="group" aria-label="Estilo">
           <label><input type="radio" name="estilo" value="Retrato de animal" data-en-v="Pet portrait"><span data-en="Pet portrait">Retrato de animal</span></label>
           <label><input type="radio" name="estilo" value="Realismo" data-en-v="Realism"><span data-en="Realism">Realismo</span></label>
@@ -312,6 +315,7 @@
 <footer class="rodape escuro">
   <div class="wrap">
     <a class="marca" href="#inicio">Christian Andrade</a>
+    <p class="frase" data-en="From stencil to skin, in Lisbon.">Do stencil à pele, em Lisboa.</p>
     <div class="links">
       <a href="https://www.instagram.com/christian_tattoo/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://wa.me/351939480752" target="_blank" rel="noopener">WhatsApp +351 939 480 752</a>
@@ -328,8 +332,8 @@
   <button class="seta prox" type="button" aria-label="Seguinte">→</button>
 </div>
 
-<script src="assets/js/dados.js?v=1"></script>
-<script src="assets/js/stencil.js?v=1"></script>
-<script src="assets/js/site.js?v=1"></script>
+<script src="assets/js/dados.js?v=2"></script>
+<script src="assets/js/stencil.js?v=2"></script>
+<script src="assets/js/site.js?v=2"></script>
 </body>
 </html>

@@ -7,7 +7,7 @@ from PIL import Image
 S = Path(__file__).resolve().parent.parent
 NOMES = ['cao', 'escorpiao', 'leao']
 P = int(sys.argv[1]) if len(sys.argv) > 1 else 0
-TS = [0.4, 1.0, 1.8, 2.6, 3.4, 4.2, 5.0, 6.0, 7.6, 8.1]
+TS = [0.35, 0.7, 1.1, 2.2, 3.4, 4.6, 5.2, 6.0, 8.2, 8.6]
 b64 = lambda f: 'data:image/webp;base64,' + base64.b64encode((S / f).read_bytes()).decode()
 
 with sync_playwright() as p:
@@ -19,7 +19,7 @@ with sync_playwright() as p:
       for(let i=0;i<a.length;i++){const m=new Image();m.src=a[i];await m.decode();H.textura(i,m)}}""", [b64(f'assets/hero/{n}.webp') for n in NOMES])
     out = []
     for t in TS:
-        d = g.evaluate(f"(H.desenha({P * 8.4 + t},420,1),document.getElementById('c').toDataURL('image/jpeg',.9))")
+        d = g.evaluate(f"(H.desenha({P * 9.0 + t},520,1),document.getElementById('c').toDataURL('image/jpeg',.9))")
         out.append(Image.open(io.BytesIO(base64.b64decode(d.split(',', 1)[1]))))
     W = sum(i.width for i in out)
     o = Image.new('RGB', (out[0].width * 5, out[0].height * 2))
